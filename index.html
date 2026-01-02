@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kreyòl Pratik - Curso de Crioulo Haitiano</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇭🇹</text></svg>">
+  
+  <style>
+    /* ========== RESET & BASE ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #0d2137;
+      --primary-light: #1a3a5c;
+      --accent: #e8a838;
+      --accent-hover: #d49730;
+      --success: #10b981;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+      --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+      --radius: 16px;
+      --radius-sm: 8px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ========== HERO SECTION ========== */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      padding: 60px 20px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .hero-flag {
+      font-size: 64px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .hero h1 {
+      color: white;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-subtitle {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--primary);
+      box-shadow: 0 4px 15px rgba(232, 168, 56, 0.4);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(232, 168, 56, 0.5);
+    }
+
+    /* ========== CONTAINER ========== */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ========== PROGRESS CARD ========== */
+    .progress-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin: -40px auto 32px;
+      max-width: 860px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      z-index: 10;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .progress-label {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .progress-stats {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .progress-percent {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--success);
+    }
+
+    .progress-count {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background: var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--success), #34d399);
+      border-radius: 10px;
+      transition: width 0.5s ease;
+      width: 0%;
+    }
+
+    /* ========== MODULES ========== */
+    .modules-section {
+      margin-bottom: 40px;
+    }
+
+    .module {
+      background: var(--card);
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .module-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      user-select: none;
+    }
+
+    .module-header:hover {
+      background: var(--bg);
+    }
+
+    .module.open .module-header {
+      background: var(--primary);
+      color: white;
+    }
+
+    .module-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .module-number {
+      width: 36px;
+      height: 36px;
+      background: var(--primary-light);
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .module.open .module-number {
+      background: var(--accent);
+      color: var(--primary);
+    }
+
+    .module-title {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .module-arrow {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+      opacity: 0.6;
+    }
+
+    .module.open .module-arrow {
+      transform: rotate(180deg);
+      opacity: 1;
+    }
+
+    .module-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .module.open .module-content {
+      max-height: 2000px;
+    }
+
+    .lessons-list {
+      padding: 8px 12px 12px;
+    }
+
+    /* ========== LESSON ITEMS ========== */
+    .lesson-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      margin: 4px 0;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 2px solid transparent;
+    }
+
+    .lesson-item:hover {
+      background: var(--bg);
+      border-color: var(--border);
+    }
+
+    .lesson-item.active {
+      background: #eff6ff;
+      border-color: #3b82f6;
+    }
+
+    .lesson-check {
+      width: 26px;
+      height: 26px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+      font-size: 14px;
+      color: white;
+    }
+
+    .lesson-item.completed .lesson-check {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    .lesson-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .lesson-number {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+
+    .lesson-title {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .lesson-duration {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    /* ========== LESSON VIEW ========== */
+    .lesson-view {
+      display: none;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 32px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      animation: slideIn 0.3s ease;
+    }
+
+    .lesson-view.visible {
+      display: block;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .lesson-view-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: white;
+      padding: 28px;
+    }
+
+    .lesson-view-header h2 {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    .lesson-meta {
+      display: flex;
+      gap: 20px;
+      opacity: 0.9;
+      font-size: 0.9rem;
+    }
+
+    .lesson-meta span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .lesson-view-body {
+      padding: 28px;
+    }
+
+    .lesson-section {
+      margin-bottom: 28px;
+    }
+
+    .lesson-section:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .section-content {
+      color: var(--text);
+      line-height: 1.8;
+      background: var(--bg);
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      border-left: 4px solid var(--primary-light);
+    }
+
+    /* Notes */
+    .notes-section {
+      background: #fefce8;
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      border: 1px solid #fef08a;
+    }
+
+    .notes-textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 16px;
+      border: 2px solid #fef08a;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.95rem;
+      resize: vertical;
+      background: white;
+      transition: border-color 0.2s ease;
+    }
+
+    .notes-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .notes-status {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+      text-align: right;
+    }
+
+    .notes-status.saved {
+      color: var(--success);
+    }
+
+    /* Completion */
+    .completion-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px;
+      background: #f0fdf4;
+      border-radius: var(--radius-sm);
+      margin-top: 24px;
+      border: 1px solid #bbf7d0;
+    }
+
+    .completion-checkbox {
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      accent-color: var(--success);
+    }
+
+    .completion-label {
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* ========== TIPS SECTION ========== */
+    .tips-section {
+      background: linear-gradient(135deg, #fefbeb 0%, #fef3c7 100%);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 40px;
+      border: 1px solid #fcd34d;
+    }
+
+    .tips-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .tip-item {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(252, 211, 77, 0.5);
+    }
+
+    .tip-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .tip-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .tip-text {
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .tip-text strong {
+      color: var(--primary);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 640px) {
+      .hero {
+        padding: 40px 20px 60px;
+      }
+
+      .hero-flag {
+        font-size: 48px;
+      }
+
+      .progress-card {
+        margin: -30px 16px 24px;
+        padding: 20px;
+      }
+
+      .module-header {
+        padding: 16px;
+      }
+
+      .module-title {
+        font-size: 0.9rem;
+      }
+
+      .lesson-item {
+        padding: 12px;
+      }
+
+      .lesson-view-header {
+        padding: 20px;
+      }
+
+      .lesson-view-body {
+        padding: 20px;
+      }
+
+      .lesson-meta {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .tips-section {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-content">
+      <span class="hero-flag">🇭🇹</span>
+      <h1>Kreyòl Pratik</h1>
+      <p class="hero-subtitle">Aprenda Crioulo Haitiano com foco em comunicação real</p>
+      <span class="badge">📚 20 aulas · Comunicação prática</span>
+      <br>
+      <button class="btn btn-primary" onclick="startCourse()">
+        ▶ Iniciar Curso
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="container">
+    
+    <!-- Progress -->
+    <div class="progress-card">
+      <div class="progress-header">
+        <span class="progress-label">📊 Seu progresso</span>
+        <div class="progress-stats">
+          <span class="progress-percent" id="progressPercent">0%</span>
+          <span class="progress-count" id="progressCount">(0/20 aulas)</span>
+        </div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <!-- Lesson View (appears when lesson selected) -->
+    <div class="lesson-view" id="lessonView"></div>
+
+    <!-- Modules -->
+    <section class="modules-section" id="modulesSection"></section>
+
+    <!-- Tips -->
+    <aside class="tips-section">
+      <h3 class="tips-title">💡 Dicas ao Professor</h3>
+      
+      <div class="tip-item">
+        <span class="tip-icon">⚖️</span>
+        <div class="tip-text">
+          <strong>Regra 70/30:</strong> Dedique 70% do tempo à prática oral e apenas 30% à explicação gramatical.
+        </div>
+      </div>
+      
+      <div class="tip-item">
+        <span class="tip-icon">🗣️</span>
+        <div class="tip-text">
+          <strong>Pronúncia:</strong> Trabalhe os sons <em>è</em> (aberto), <em>ò</em> (aberto), e nasalizações <em>an, en, on</em>.
+        </div>
+      </div>
+      
+      <div class="tip-item">
+        <span class="tip-icon">🎵</span>
+        <div class="tip-text">
+          <strong>Cultura:</strong> Use músicas de <em>Kompa</em> e <em>Clipes musicais de JW.ORG</em> para imersão cultural autêntica.
+        </div>
+      </div>
+      
+      <div class="tip-item">
+        <span class="tip-icon">🔄</span>
+        <div class="tip-text">
+          <strong>Revisão:</strong> 5 minutos revisando aulas anteriores aumentam significativamente a retenção.
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Kreyòl Pratik · Material de apoio pedagógico<br>
+  </footer>
+
+  <script>
+    // ========== DATA ==========
+    const COURSE_DATA = [
+      {
+        id: 1,
+        name: "Identidade e Estrutura Básica",
+        lessons: [
+          { id: 1, title: "Quem sou eu?", content: "Pronomes plenos (mwen, ou, li, nou, yo), marcador SE para identidade, fonética básica (an, en, on, ou). Estrutura: Mwen se + nome/profissão.", practice: "Apresentação de nome e profissão. Praticar: 'Mwen se Maria. Mwen se pwofesè.'", duration: "45 min" },
+          { id: 2, title: "De onde você vem?", content: "Preposição NAN (em/no/na), nomes de países e cidades. Estrutura: Mwen soti nan + lugar. Negação com PA.", practice: "Perguntar e responder sobre origem. 'Kote ou soti?' – 'Mwen soti nan Brezil.'", duration: "45 min" },
+          { id: 3, title: "Família e relações", content: "Vocabulário familiar (manman, papa, frè, sè, pitit). Possessivos com posição pós-nominal. Plural com YO.", practice: "Descrever membros da família. 'Manman mwen rele Ana. Mwen gen de frè.'", duration: "50 min" },
+          { id: 4, title: "Números e idade", content: "Números de 1-100. Estrutura para idade: Mwen gen + número + an. Perguntas com KONBYEN.", practice: "Dizer a idade, perguntar quantidade. 'Konbyen an ou genyen?' – 'Mwen gen trant an.'", duration: "45 min" }
+        ]
+      },
+      {
+        id: 2,
+        name: "Determinantes e Tempo",
+        lessons: [
+          { id: 5, title: "Artigos e demonstrativos", content: "Artigo definido LA/A/LAN (pós-nominal). Demonstrativos SA A (este) e SA (isso). Diferença de uso contextual.", practice: "Identificar objetos na sala. 'Liv la bèl.' – 'Ki sa sa a ye?'", duration: "45 min" },
+          { id: 6, title: "Dias e meses", content: "Dias da semana (lendi, madi, mèkredi...), meses do ano. Preposições temporais: nan, pandan.", practice: "Falar sobre datas importantes. 'Fèt mwen se nan mwa jen.'", duration: "40 min" },
+          { id: 7, title: "Horas e rotina", content: "Perguntar horas: Ki lè li ye? Responder: Li + número + è. Vocabulário de períodos do dia.", practice: "Descrever horários do dia. 'Mwen leve a sizan dimaten.'", duration: "50 min" },
+          { id: 8, title: "Clima e estações", content: "Vocabulário climático (lapli, solèy, frèt, cho). Estrutura impessoal: Li fè + clima. Estações no Haiti.", practice: "Descrever o tempo hoje. 'Ki jan tan an ye?' – 'Li fè cho anpil.'", duration: "40 min" }
+        ]
+      },
+      {
+        id: 3,
+        name: "Ações e Rotina",
+        lessons: [
+          { id: 9, title: "Verbos do cotidiano", content: "Verbos essenciais: manje, bwè, dòmi, travay, pale. Presente habitual (verbo sem marcador). Estrutura SVO.", practice: "Descrever rotina diária. 'Mwen manje diri chak jou.'", duration: "50 min" },
+          { id: 10, title: "Marcador AP (progressivo)", content: "Uso de AP para ação em progresso. Posição pré-verbal. Diferença entre habitual e progressivo.", practice: "Descrever ações acontecendo agora. 'Mwen ap travay kounye a.'", duration: "45 min" },
+          { id: 11, title: "Marcador TE (passado)", content: "Uso de TE para passado. Combinação TE + verbo. Advérbios de tempo passado: yè, avan.", practice: "Contar o que fez ontem. 'Yè mwen te ale nan mache a.'", duration: "50 min" },
+          { id: 12, title: "Marcador PRAL/AP (futuro)", content: "PRAL para futuro próximo/intenção. AP + verbo para futuro. Advérbios: demen, pita.", practice: "Falar sobre planos. 'Demen mwen pral vizite zanmi mwen.'", duration: "45 min" }
+        ]
+      },
+      {
+        id: 4,
+        name: "Descrição e Espaço",
+        lessons: [
+          { id: 13, title: "Cores e adjetivos", content: "Cores principais (wouj, ble, vèt, jòn, nwa, blan). Adjetivos pós-nominais. Intensificadores: anpil, twòp.", practice: "Descrever objetos e roupas. 'Rad la wouj. Li bèl anpil.'", duration: "45 min" },
+          { id: 14, title: "Corpo e saúde", content: "Partes do corpo (tèt, men, pye, vant). Expressar dor: Mwen gen doulè nan + parte. Vocabulário médico básico.", practice: "Descrever sintomas. 'Mwen gen doulè nan tèt mwen.'", duration: "50 min" },
+          { id: 15, title: "Casa e cômodos", content: "Cômodos (chanm, kizin, salon, twalèt). Preposições espaciais: sou, anba, devan, dèyè.", practice: "Descrever a casa. 'Chanm mwen gen yon fenèt. Liv la sou tab la.'", duration: "45 min" },
+          { id: 16, title: "Cidade e direções", content: "Lugares da cidade (lekòl, legliz, lopital, mache). Pedir direções: Ki kote...? Dar direções: Ale, vire, kontinye.", practice: "Dar e seguir direções. 'Ki kote lopital la ye?' – 'Vire agoch.'", duration: "50 min" }
+        ]
+      },
+      {
+        id: 5,
+        name: "Vocabulário e Tempos Compostos",
+        lessons: [
+          { id: 17, title: "Comida e restaurante", content: "Pratos haitianos (diri ak pwa, griyo, bannann peze). Pedir comida: Mwen ta renmen... Expressões de gosto.", practice: "Simular pedido em restaurante. 'Mwen ta renmen diri ak pwa, souple.'", duration: "50 min" },
+          { id: 18, title: "Compras e dinheiro", content: "Vocabulário de compras (achte, vann, peye). Moeda: goud. Negociar preço: Konbyen sa koute?", practice: "Simular compra no mercado. 'Konbyen pòm nan koute?' – 'Li koute ven goud.'", duration: "45 min" },
+          { id: 19, title: "Tempos compostos (TE AP)", content: "Passado progressivo: TE AP + verbo. Uso narrativo. Contraste com passado simples.", practice: "Contar histórias no passado. 'Mwen t ap dòmi lè telefòn nan sonnen.'", duration: "50 min" },
+          { id: 20, title: "Revisão e cultura", content: "Revisão geral de estruturas. Introdução cultural: Kompa, Rara, provérbios haitianos. Recursos para continuar.", practice: "Conversação livre usando todas as estruturas. Discussão sobre cultura haitiana.", duration: "60 min" }
+        ]
+      }
+    ];
+
+    // ========== STATE ==========
+    let progress = JSON.parse(localStorage.getItem('kreyol_progress') || '{}');
+    let notes = JSON.parse(localStorage.getItem('kreyol_notes') || '{}');
+    let currentLesson = null;
+
+    // ========== RENDER ==========
+    function renderModules() {
+      const container = document.getElementById('modulesSection');
+      container.innerHTML = COURSE_DATA.map((module, idx) => `
+        <div class="module" data-module="${module.id}">
+          <div class="module-header" onclick="toggleModule(${module.id})">
+            <div class="module-left">
+              <span class="module-number">${idx + 1}</span>
+              <span class="module-title">${module.name}</span>
+            </div>
+            <span class="module-arrow">▼</span>
+          </div>
+          <div class="module-content">
+            <div class="lessons-list">
+              ${module.lessons.map(lesson => `
+                <div class="lesson-item ${progress[lesson.id] ? 'completed' : ''}" 
+                     data-lesson="${lesson.id}"
+                     onclick="selectLesson(${lesson.id})">
+                  <div class="lesson-check">${progress[lesson.id] ? '✓' : ''}</div>
+                  <div class="lesson-info">
+                    <div class="lesson-number">Aula ${lesson.id}</div>
+                    <div class="lesson-title">${lesson.title}</div>
+                  </div>
+                  <div class="lesson-duration">${lesson.duration}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderLessonView(lesson) {
+      const moduleName = COURSE_DATA.find(m => m.lessons.some(l => l.id === lesson.id))?.name || '';
+      const savedNote = notes[lesson.id] || '';
+      const isCompleted = progress[lesson.id] || false;
+
+      const container = document.getElementById('lessonView');
+      container.innerHTML = `
+        <div class="lesson-view-header">
+          <h2>Aula ${lesson.id}: ${lesson.title}</h2>
+          <div class="lesson-meta">
+            <span>⏱️ ${lesson.duration}</span>
+            <span>📁 ${moduleName}</span>
+          </div>
+        </div>
+        <div class="lesson-view-body">
+          <div class="lesson-section">
+            <div class="section-label">📖 Conteúdo Gramatical</div>
+            <div class="section-content">${lesson.content}</div>
+          </div>
+          <div class="lesson-section">
+            <div class="section-label">🎯 Prática Sugerida</div>
+            <div class="section-content">${lesson.practice}</div>
+          </div>
+          <div class="lesson-section">
+            <div class="section-label">✏️ Notas do Professor</div>
+            <div class="notes-section">
+              <textarea class="notes-textarea" 
+                        id="notesArea"
+                        placeholder="Adicione suas anotações para esta aula..."
+                        oninput="saveNote(${lesson.id})">${savedNote}</textarea>
+              <div class="notes-status" id="notesStatus">${savedNote ? '✓ Salvo' : ''}</div>
+            </div>
+          </div>
+          <div class="completion-box">
+            <input type="checkbox" 
+                   class="completion-checkbox" 
+                   id="completionCheck"
+                   ${isCompleted ? 'checked' : ''}
+                   onchange="toggleCompletion(${lesson.id})">
+            <label class="completion-label" for="completionCheck">Marcar aula como concluída</label>
+          </div>
+        </div>
+      `;
+      container.classList.add('visible');
+      container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function updateProgress() {
+      const total = 20;
+      const completed = Object.values(progress).filter(Boolean).length;
+      const percent = Math.round((completed / total) * 100);
+
+      document.getElementById('progressFill').style.width = `${percent}%`;
+      document.getElementById('progressPercent').textContent = `${percent}%`;
+      document.getElementById('progressCount').textContent = `(${completed}/${total} aulas)`;
+    }
+
+    // ========== INTERACTIONS ==========
+    function toggleModule(moduleId) {
+      const module = document.querySelector(`.module[data-module="${moduleId}"]`);
+      if (module) {
+        module.classList.toggle('open');
+      }
+    }
+
+    function selectLesson(lessonId) {
+      // Find lesson
+      let lesson = null;
+      for (const module of COURSE_DATA) {
+        lesson = module.lessons.find(l => l.id === lessonId);
+        if (lesson) break;
+      }
+      if (!lesson) return;
+
+      currentLesson = lesson;
+
+      // Update active state
+      document.querySelectorAll('.lesson-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      document.querySelector(`.lesson-item[data-lesson="${lessonId}"]`)?.classList.add('active');
+
+      renderLessonView(lesson);
+    }
+
+    function toggleCompletion(lessonId) {
+      const checkbox = document.getElementById('completionCheck');
+      progress[lessonId] = checkbox.checked;
+      localStorage.setItem('kreyol_progress', JSON.stringify(progress));
+
+      // Update UI
+      const lessonItem = document.querySelector(`.lesson-item[data-lesson="${lessonId}"]`);
+      if (lessonItem) {
+        lessonItem.classList.toggle('completed', checkbox.checked);
+        lessonItem.querySelector('.lesson-check').textContent = checkbox.checked ? '✓' : '';
+      }
+
+      updateProgress();
+    }
+
+    let saveTimeout;
+    function saveNote(lessonId) {
+      clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(() => {
+        const textarea = document.getElementById('notesArea');
+        const status = document.getElementById('notesStatus');
+        const value = textarea.value.trim();
+
+        if (value) {
+          notes[lessonId] = value;
+        } else {
+          delete notes[lessonId];
+        }
+        localStorage.setItem('kreyol_notes', JSON.stringify(notes));
+
+        status.textContent = value ? '✓ Salvo' : '';
+        status.classList.toggle('saved', !!value);
+      }, 500);
+    }
+
+    function startCourse() {
+      const modulesSection = document.getElementById('modulesSection');
+      modulesSection.scrollIntoView({ behavior: 'smooth' });
+      
+      // Open first module
+      setTimeout(() => {
+        const firstModule = document.querySelector('.module');
+        if (firstModule && !firstModule.classList.contains('open')) {
+          firstModule.classList.add('open');
+        }
+      }, 500);
+    }
+
+    // ========== INIT ==========
+    document.addEventListener('DOMContentLoaded', () => {
+      renderModules();
+      updateProgress();
+    });
+  </script>
+
+</body>
+</html>
