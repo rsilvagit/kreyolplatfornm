@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kreyòl Pratik - Curso de Crioulo Haitiano</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇭🇹</text></svg>">
-  
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700;800&display=swap" rel="stylesheet">
+
   <style>
     /* ========== RESET & BASE ========== */
     * {
@@ -15,25 +16,41 @@
     }
 
     :root {
-      --primary: #0d2137;
-      --primary-light: #1a3a5c;
-      --accent: #e8a838;
-      --accent-hover: #d49730;
-      --success: #10b981;
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --text: #1e293b;
-      --text-muted: #64748b;
+      /* Cores da bandeira haitiana */
+      --blue: #00209F;
+      --red: #D21034;
+      --gold: #F4C430;
+      /* Cores complementares */
+      --sea: #0EA5E9;
+      --palm: #16A34A;
+      --sand: #FEF7ED;
+      --night: #0F172A;
+      --slate: #475569;
+      --mist: #F1F5F9;
+      --white: #FFFFFF;
+      --success: #10B981;
+      /* Aliases para compatibilidade */
+      --primary: var(--blue);
+      --primary-light: #1a4a9f;
+      --accent: var(--gold);
+      --accent-hover: #d4a520;
+      --bg: var(--sand);
+      --card: var(--white);
+      --text: var(--night);
+      --text-muted: var(--slate);
       --border: #e2e8f0;
-      --shadow: 0 4px 20px rgba(0,0,0,0.08);
-      --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 32px rgba(0,0,0,0.12);
       --radius: 16px;
-      --radius-sm: 8px;
+      --radius-sm: 10px;
+      /* Fontes */
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
+      font-family: var(--font-body);
+      background: linear-gradient(180deg, var(--sand) 0%, var(--white) 100%);
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
@@ -41,8 +58,8 @@
 
     /* ========== HERO SECTION ========== */
     .hero {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-      padding: 60px 20px 80px;
+      background: linear-gradient(135deg, var(--blue) 0%, #001570 50%, var(--night) 100%);
+      padding: 48px 20px 90px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -51,11 +68,12 @@
     .hero::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      top: -50%;
+      right: -20%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--red) 0%, transparent 70%);
+      opacity: 0.12;
     }
 
     .hero-content {
@@ -72,11 +90,18 @@
     }
 
     .hero h1 {
+      font-family: var(--font-display);
       color: white;
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
       margin-bottom: 12px;
-      letter-spacing: -0.5px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--gold) 0%, #FFD700 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .hero-subtitle {
@@ -536,70 +561,50 @@
 
     .vocab-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
       margin-top: 12px;
     }
 
     .vocab-card {
-      perspective: 1000px;
-      height: 100px;
-      cursor: pointer;
-    }
-
-    .vocab-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.5s;
-      transform-style: preserve-3d;
-    }
-
-    .vocab-card:hover .vocab-card-inner,
-    .vocab-card.flipped .vocab-card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .vocab-front, .vocab-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
+      background: var(--white);
+      border: 1px solid var(--mist);
       border-radius: var(--radius-sm);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
+      padding: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .vocab-card:hover {
+      border-color: var(--blue);
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+
+    .vocab-kreyol {
+      font-family: var(--font-display);
       font-weight: 600;
+      color: var(--blue);
+      font-size: 1.05rem;
+      margin-bottom: 4px;
     }
 
-    .vocab-front {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-      color: white;
-      font-size: 1.1rem;
+    .vocab-kreyol::before {
+      content: '🔊 ';
+      font-size: 0.9rem;
     }
 
-    .vocab-front small {
-      font-size: 0.7rem;
-      opacity: 0.8;
+    .vocab-portuguese {
+      color: var(--slate);
+      font-size: 0.9rem;
+    }
+
+    .vocab-pronunciation {
+      font-size: 0.75rem;
+      color: var(--slate);
+      font-style: italic;
       margin-top: 4px;
-      font-weight: 400;
-    }
-
-    .vocab-back {
-      background: var(--accent);
-      color: var(--primary);
-      transform: rotateY(180deg);
-      font-size: 0.95rem;
-    }
-
-    .vocab-back small {
-      font-size: 0.7rem;
       opacity: 0.7;
-      margin-top: 4px;
-      font-weight: 400;
     }
 
     .vocab-hint {
@@ -999,7 +1004,7 @@
   <header class="hero">
     <div class="hero-content">
       <span class="hero-flag">🇭🇹</span>
-      <h1>Kreyòl Pratik</h1>
+      <h1>Aprenda <span>Kreyòl</span></h1>
       <p class="hero-subtitle">Sua jornada para falar Crioulo Haitiano começa aqui!</p>
       <span class="badge">📚 20 aulas · Aprenda no seu ritmo</span>
       <br>
@@ -1081,6 +1086,14 @@
   </footer>
 
   <script>
+    // ========== AUDIO TTS ==========
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'fr-HT';
+      utterance.rate = 0.8;
+      speechSynthesis.speak(utterance);
+    }
+
     // ========== PHRASES OF THE DAY ==========
     const DAILY_PHRASES = [
       { kreyol: "Bonjou!", translation: "Olá! / Bom dia!" },
